@@ -12,9 +12,11 @@ class Plugin implements BundlePluginInterface
     public function getBundles(ParserInterface $parser)
     {
         return [
-            (new BundleConfig('SKowalsky\CwCustoms\SKowalskyCwCustoms'))
-                ->setReplace(['sk-cwcustoms'])
-                ->setLoadAfter(['isotope'])
+            (new BundleConfig(SKowalskyCwCustoms::class))
+                ->setLoadAfter([
+                    ContaoCoreBundle::class,
+                    'isotope'
+                ])
         ];
     }
     

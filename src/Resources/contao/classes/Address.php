@@ -238,6 +238,9 @@ abstract class Address extends CheckoutStep
                 }
             }
 
+            $groups = \Input::post('billingaddress_groups');
+            $member_groups = unserialize($objAddress->groups);
+
             foreach ($arrFields as $field) {
 
                 if (!is_array($field['dca'])
@@ -255,13 +258,6 @@ abstract class Address extends CheckoutStep
                     continue;
                 }
 
-                // Only show business customer fields if user selected business customer option
-                if($field['value'] == 'company' || $field['value'] == 'zusatz' || $field['value'] == 'vat_no')
-                {
-                    $groups = \Input::post('billingaddress_groups');
-                    if((!isset($groups) || $groups != 2) && (!isset($objAddress->groups) || $objAddress->groups != 2)) continue;
-                }
-
                 /** @var \Widget $strClass */
                 $strClass = $GLOBALS['TL_FFL'][$field['dca']['inputType']];
 
@@ -273,6 +269,35 @@ abstract class Address extends CheckoutStep
                 } elseif (strlen($field['dca']['eval']['conditionField'])) {
                     // Special field type "conditionalselect"
                     $field['dca']['eval']['conditionField'] = $this->getStepClass() . '_' . $field['dca']['eval']['conditionField'];
+                }
+
+                // Only show business customer fields if user selected business customer option
+                if($field['value'] == 'company' || $field['value'] == 'zusatz' || $field['value'] == 'vat_no')
+                {
+                    if(
+                        (!isset($groups) || $groups != 2)
+                        && (!isset($objAddress->groups) || $objAddress->groups != 2)
+                        && (!isset($groups[0]) || $groups[0] != '2')
+                        && (!isset($member_groups) || !is_array($member_groups) || count($member_groups) == 0 || $member_groups[0] != 2)
+                    ) {
+                        $field['dca']['eval']['style'] = 'display:none;';   // TODO Try to set type to 'hidden'
+                        $objWidget = new $strClass(
+                            $strClass::getAttributesFromDca(
+                                $field['dca'],
+                                $this->getStepClass() . '_' . $field['value'],
+                                $objAddress->{$field['value']}
+                            )
+                        );
+
+                        $objWidget->mandatory   = false;
+                        $objWidget->required    = $objWidget->mandatory;
+                        $objWidget->tableless   = isset($this->objModule->tableless) ? $this->objModule->tableless : true;
+                        $objWidget->storeValues = true;
+                        $objWidget->dca_config  = $field['dca'];
+
+                        $this->arrWidgets[$field['value']] = $objWidget;
+                        continue;
+                    }
                 }
 
                 $objWidget = new $strClass(
