@@ -1,0 +1,30 @@
+{
+  "name":"skowalsky/cw_customs",
+  "description": "Adds custom functionality needed by the ComputerWorks Shop",
+  "keywords":["computerworks", "cw", "customs", "skowalsky", "private"],
+  "type":"contao-bundle",
+  "license":"LGPL-3.0-or-later",
+  "authors":[
+    {
+      "name":"Samuel Kowalsky",
+      "homepage":"https://www.computerworks.de",
+      "role":"Developer"
+    }
+  ],
+  "require":{
+    "php":">=7.0",
+    "contao/core-bundle": "~4.4",
+    "isotope/isotope-core": ">=2.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "SKowalsky\\CwCustoms\\": "src"
+    },
+    "classmap": [
+      "src/Resources/contao/"
+    ]
+  },
+  "extra": {
+    "contao-manager-plugin": "SKowalsky\\CwCustoms\\ContaoManager\\Plugin"
+  }
+}
