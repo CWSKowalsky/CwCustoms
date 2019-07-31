@@ -281,6 +281,7 @@ abstract class Address extends CheckoutStep
                         && (!isset($member_groups) || !is_array($member_groups) || count($member_groups) == 0 || $member_groups[0] != 2)
                     ) {
                         $field['dca']['eval']['style'] = 'display:none;';   // TODO Try to set type to 'hidden'
+                        $field['dca']['inputType'] = 'justtext';
                         $objWidget = new $strClass(
                             $strClass::getAttributesFromDca(
                                 $field['dca'],

@@ -13,10 +13,7 @@ class Plugin implements BundlePluginInterface
     {
         return [
             (new BundleConfig('SKowalsky\CwCustoms\SKowalskyCwCustoms'))
-                ->setLoadAfter([
-                    ContaoCoreBundle::class,
-                    'isotope'
-                ])
+                ->setLoadAfter('isotope')
         ];
     }
     

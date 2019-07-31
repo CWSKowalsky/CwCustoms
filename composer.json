@@ -14,7 +14,8 @@
   "require":{
     "php":">=7.0",
     "contao/core-bundle": "~4.4",
-    "isotope/isotope-core": ">=2.0"
+    "isotope/isotope-core": ">=2.0",
+    "discordier/justtextwidgets": ">=1.2"
   },
   "autoload": {
     "psr-4": {
