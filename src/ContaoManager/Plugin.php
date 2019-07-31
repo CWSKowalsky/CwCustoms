@@ -13,7 +13,7 @@ class Plugin implements BundlePluginInterface
     {
         return [
             (new BundleConfig('SKowalsky\CwCustoms\SKowalskyCwCustoms'))
-                ->setLoadAfter('isotope')
+                ->setLoadAfter(['isotope'])
         ];
     }
     
