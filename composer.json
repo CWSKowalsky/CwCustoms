@@ -25,7 +25,7 @@
     "classmap": [
       "src/Resources/contao/"
     ],
-    "files": ["src/Resources/contao/classes/Adress.php"]
+    "files": ["src/Resources/contao/classes/Address.php"]
   },
   "extra": {
     "contao-manager-plugin": "SKowalsky\\CwCustoms\\ContaoManager\\Plugin"
