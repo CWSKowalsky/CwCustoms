@@ -20,7 +20,7 @@
   "autoload": {
     "psr-4": {
       "SKowalsky\\CwCustoms\\": "src",
-      "Isotope\\CheckoutStep\\": "src/Resources/contao/classes/ChekoutStep/Address.php"
+      "Isotope\\CheckoutStep\\": "src/Resources/contao/classes/CheckoutStep"
     },
     "classmap": [
       "src/Resources/contao/"
