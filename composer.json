@@ -20,11 +20,12 @@
   "autoload": {
     "psr-4": {
       "SKowalsky\\CwCustoms\\": "src",
-      "Isotope\\CheckoutStep\\Address": "src/Resources/contao/classes/Adress.php"
+      "Isotope\\CheckoutStep\\Address\\": "src/Resources/contao/classes/Adress.php"
     },
     "classmap": [
       "src/Resources/contao/"
-    ]
+    ],
+    "files": ["src/Resources/contao/classes/Adress.php"]
   },
   "extra": {
     "contao-manager-plugin": "SKowalsky\\CwCustoms\\ContaoManager\\Plugin"
