@@ -175,7 +175,6 @@ abstract class Address extends CheckoutStep
 
             // Validate input
             if ($blnValidate) {
-
                 $objWidget->validate();
                 $varValue = (string) $objWidget->value;
 
@@ -203,7 +202,6 @@ abstract class Address extends CheckoutStep
                 }
 
             } else {
-
                 \Input::setPost($objWidget->name, $objWidget->value);
 
                 $objValidator = clone $objWidget;
@@ -214,7 +212,6 @@ abstract class Address extends CheckoutStep
                 }
             }
         }
-
         return $arrAddress;
     }
 
@@ -272,32 +269,17 @@ abstract class Address extends CheckoutStep
                 }
 
                 // Only show business customer fields if user selected business customer option
+                $hidden = false;
                 if($field['value'] == 'company' || $field['value'] == 'zusatz' || $field['value'] == 'vat_no')
                 {
                     if(
                         (!isset($groups) || $groups != 2)
-                        && (!isset($objAddress->groups) || $objAddress->groups != 2)
+                        //&& (!isset($objAddress->groups) || $objAddress->groups != 2)
                         && (!isset($groups[0]) || $groups[0] != '2')
-                        && (!isset($member_groups) || !is_array($member_groups) || count($member_groups) == 0 || $member_groups[0] != 2)
+                        //&& (!isset($member_groups) || !is_array($member_groups) || count($member_groups) == 0 || $member_groups[0] != 2)
                     ) {
-                        $field['dca']['eval']['style'] = 'display:none;';   // TODO Try to set type to 'hidden'
-                        $field['dca']['inputType'] = 'justtext';
-                        $objWidget = new $strClass(
-                            $strClass::getAttributesFromDca(
-                                $field['dca'],
-                                $this->getStepClass() . '_' . $field['value'],
-                                $objAddress->{$field['value']}
-                            )
-                        );
-
-                        $objWidget->mandatory   = false;
-                        $objWidget->required    = $objWidget->mandatory;
-                        $objWidget->tableless   = isset($this->objModule->tableless) ? $this->objModule->tableless : true;
-                        $objWidget->storeValues = true;
-                        $objWidget->dca_config  = $field['dca'];
-
-                        $this->arrWidgets[$field['value']] = $objWidget;
-                        continue;
+                        $field['mandatory'] = false;
+                        $hidden = true;
                     }
                 }
 
@@ -308,6 +290,13 @@ abstract class Address extends CheckoutStep
                         $objAddress->{$field['value']}
                     )
                 );
+
+                if($hidden) {
+                    $objWidget->type = 'hidden';
+                    $objWidget->value = '';
+                    $objWidget->style = 'display:none';
+                    $objWidget->label = '';
+                }
 
                 $objWidget->mandatory   = $field['mandatory'] ? true : false;
                 $objWidget->required    = $objWidget->mandatory;
