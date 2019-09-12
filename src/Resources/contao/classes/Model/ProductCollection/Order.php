@@ -211,8 +211,8 @@ class Order extends ProductCollection implements IsotopePurchasableCollection
 
                     // MARK
                     // Check if notification is allowed for this group
-                    $nTagged = strpos($objNotification->title, '#') !== false;
-                    if($nTagged && strpos($objNotification->title, '#'.$groups) === false) { // if tagged but not with correct id
+                    $nTagged = strpos($objNotification->title, '@') !== false;
+                    if($nTagged && strpos($objNotification->title, '@'.$groups) === false) { // if tagged but not with correct id
                         continue;   // skip notification
                     }
 
