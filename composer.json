@@ -24,6 +24,10 @@
     },
     "classmap": [
       "src/Resources/contao/"
+    ],
+    "exclude-from-classmap": [
+      "vendor/isotope/isotope-core/system/modules/isotope/library/Isotope/CheckoutStep/Address.php",
+      "vendor/isotope/isotope-core/system/modules/isotope/library/Isotope/CheckoutStep/OrderConditions.php"
     ]
   },
   "extra": {
